@@ -7,7 +7,7 @@ var path = __dirname.replace(/tools/g, '');
 
 var ipAddresses = [];
 
-fs.readFile(`${path}inventory-checkbox`, 'utf8', function (err, data) {
+fs.readFile(`${path}provisioners/inventory-checkbox`, 'utf8', function (err, data) {
     if (err) console.log('Failed to read file\n\n', err, '\n');
     else {
         var lines = data.split('\n');
@@ -19,33 +19,33 @@ fs.readFile(`${path}inventory-checkbox`, 'utf8', function (err, data) {
 
             var output = '';
 
-            request({ url: `http://${ipAddresses[0]}:8080/iTrust2`, method: 'GET' }, function (error, response, body) {
+            request({ url: `http://${ipAddresses[0]}`, method: 'GET' }, function (error, response, body) {
 
                 output += '\n------------------------\n';
                 output += '------- ' + datetime.create().format('H:M:S').bold + ' -------\n';
                 output += '------------------------\n'
 
                 if (response && response.statusCode && response.statusCode === 200) {
-                    output += `\n${ipAddresses[0]}:\t` + '   UP   '.bgGreen + '\n';
+                    output += `\n${ipAddresses[0]}: ` + '   UP   '.bgGreen + '\n';
                 }
                 else {
-                    output += `\n${ipAddresses[0]}:\t` + '  DOWN  '.bgRed + '\n';
+                    output += `\n${ipAddresses[0]}: ` + '  DOWN  '.bgRed + '\n';
                 }
 
-                request({ url: `http://${ipAddresses[1]}:8080/iTrust2`, method: 'GET' }, function (error, response, body) {
+                request({ url: `http://${ipAddresses[1]}`, method: 'GET' }, function (error, response, body) {
                     if (response && response.statusCode && response.statusCode === 200) {
-                        output += `\n${ipAddresses[1]}:\t` + '   UP   '.bgGreen + '\n';
+                        output += `\n${ipAddresses[1]}: ` + '   UP   '.bgGreen + '\n';
                     }
                     else {
-                        output += `\n${ipAddresses[1]}:\t` + '  DOWN  '.bgRed + '\n';
+                        output += `\n${ipAddresses[1]}: ` + '  DOWN  '.bgRed + '\n';
                     }
 
-                    request({ url: `http://${ipAddresses[2]}:8080/iTrust2`, method: 'GET' }, function (error, response, body) {
+                    request({ url: `http://${ipAddresses[2]}`, method: 'GET' }, function (error, response, body) {
                         if (response && response.statusCode && response.statusCode === 200) {
-                            output += `\n${ipAddresses[2]}:\t` + '   UP   '.bgGreen + '\n';
+                            output += `\n${ipAddresses[2]}: ` + '   UP   '.bgGreen + '\n';
                         }
                         else {
-                            output += `\n${ipAddresses[2]}:\t` + '  DOWN  '.bgRed + '\n';
+                            output += `\n${ipAddresses[2]}: ` + '  DOWN  '.bgRed + '\n';
                         }
                         console.log(output);
                     });
