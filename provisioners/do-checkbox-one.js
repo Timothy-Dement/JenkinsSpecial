@@ -91,8 +91,36 @@ request(listKeysOptions, function(error, response, body)
 
                             dropletIpAddress = JSON.parse(body).droplet.networks.v4[0].ip_address;
 
-                            console.log(dropletIpAddress);
+                            fs.open(`${__dirname}/inventory-checkbox`, 'a', function(error)
+                            {
+                                if (error) console.log('Failed to open file\n\n', error, '\n');
+                                else
+                                {
+                                    console.log('Successfully opened file\n');
 
+                                    var inventoryItem = dropletIpAddress;
+                                    inventoryItem += ' ansible_ssh_user=root';
+                                    inventoryItem += ` ansible_ssh_private_key_file=${__dirname}/do-checkbox.key`;
+                                    inventoryItem += ' ansible_python_interpreter=/usr/bin/python3';
+                                    inventoryItem += ` ansible_ssh_common_args='-o StrictHostKeyChecking=no'`;
+
+                                    fs.appendFile(`${__dirname}/inventory-checkbox`, inventoryItem, function(error)
+                                    {
+                                        if (error) console.log('Failed to append file\n\n', error, '\n');
+                                        else
+                                        {
+                                            console.log('Successfully appended file\n');
+
+                                            console.log('Running configuration playbook...\n');
+
+                                            var path = __dirname.replace(/provisioners/g, '');
+
+                                            shell.exec(`sudo ansible-plabook ${path}playbooks/checkbox.yml -i ${path}provisioners/inventory-checkbox --limit ${dropletIpAddress}`);
+                                        }
+                                    });
+                                }
+
+                            });
                         }
                     });
 

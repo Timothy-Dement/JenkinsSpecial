@@ -1,0 +1,4 @@
+[checkbox]
+167.99.227.119 ansible_ssh_user=root ansible_ssh_private_key_file=/home/ubuntu/JenkinsSpecial/provisioners/do-checkbox.key ansible_python_interpreter=/usr/bin/python3 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+206.189.200.199 ansible_ssh_user=root ansible_ssh_private_key_file=/home/ubuntu/JenkinsSpecial/provisioners/do-checkbox.key ansible_python_interpreter=/usr/bin/python3 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+206.189.200.201 ansible_ssh_user=root ansible_ssh_private_key_file=/home/ubuntu/JenkinsSpecial/provisioners/do-checkbox.key ansible_python_interpreter=/usr/bin/python3 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
