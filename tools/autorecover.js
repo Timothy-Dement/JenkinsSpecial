@@ -63,13 +63,13 @@ fs.readFile(`${path}provisioners/inventory-checkbox`, 'utf8', function (err, dat
 
                         if (zeroFail === 0)
                         {
+                            clearInterval(intervalId);
                             console.log('                               '.bgMagenta);
                             console.log('    Downtime limit reached.    '.bgMagenta);
                             console.log('    Deploying a new server.    '.bgMagenta);
                             console.log('                               '.bgMagenta);
                             console.log();
                             shell.exec(`sudo node ${path}provisioners/do-checkbox-one.js`);
-                            clearInterval(intervalId);
                         }
                         else if (zeroFail !== 10)
                         {
@@ -78,13 +78,13 @@ fs.readFile(`${path}provisioners/inventory-checkbox`, 'utf8', function (err, dat
 
                         if (oneFail === 0)
                         {
+                            clearInterval(intervalId);
                             console.log('                               '.bgMagenta);
                             console.log('    Downtime limit reached.    '.bgMagenta);
                             console.log('    Deploying a new server.    '.bgMagenta);
                             console.log('                               '.bgMagenta);
                             console.log();
                             shell.exec(`sudo node ${path}provisioners/do-checkbox-one.js`);
-                            clearInterval(intervalId);
                         }
                         else if(oneFail !== 10)
                         {
@@ -93,13 +93,13 @@ fs.readFile(`${path}provisioners/inventory-checkbox`, 'utf8', function (err, dat
 
                         if (twoFail === 0)
                         {
+                            clearInterval(intervalId);
                             console.log('                               '.bgMagenta);
                             console.log('    Downtime limit reached.    '.bgMagenta);
                             console.log('    Deploying a new server.    '.bgMagenta);
                             console.log('                               '.bgMagenta);
                             console.log();
                             shell.exec(`sudo node ${path}provisioners/do-checkbox-one.js`);
-                            clearInterval(intervalId);
                         }
                         else if(twoFail !== 10)
                         {

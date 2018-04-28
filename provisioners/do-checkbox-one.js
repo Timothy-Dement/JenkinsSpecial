@@ -102,7 +102,7 @@ request(listKeysOptions, function(error, response, body)
                                     inventoryItem += ' ansible_ssh_user=root';
                                     inventoryItem += ` ansible_ssh_private_key_file=${__dirname}/do-checkbox.key`;
                                     inventoryItem += ' ansible_python_interpreter=/usr/bin/python3';
-                                    inventoryItem += ` ansible_ssh_common_args='-o StrictHostKeyChecking=no'`;
+                                    inventoryItem += ` ansible_ssh_common_args='-o StrictHostKeyChecking=no'\n`;
 
                                     fs.appendFile(`${__dirname}/inventory-checkbox`, inventoryItem, function(error)
                                     {
@@ -111,19 +111,23 @@ request(listKeysOptions, function(error, response, body)
                                         {
                                             console.log('Successfully appended file\n');
 
-                                            console.log('Running configuration playbook...\n');
-
                                             var path = __dirname.replace(/provisioners/g, '');
 
-                                            shell.exec(`sudo ansible-plabook ${path}playbooks/checkbox.yml -i ${path}provisioners/inventory-checkbox --limit ${dropletIpAddress}`);
+                                            console.log('Pausing for 30 seconds...\n');
+
+                                            setTimeout(function()
+                                            {
+                                                console.log('Running configuration playbook...\n');
+
+                                                shell.exec(`sudo ansible-playbook ${path}playbooks/checkbox.yml -i ${path}provisioners/inventory-checkbox --limit ${dropletIpAddress}`);
+
+                                            }, 30000);
                                         }
                                     });
                                 }
-
                             });
                         }
                     });
-
                 }, 30000);
             }
         });
