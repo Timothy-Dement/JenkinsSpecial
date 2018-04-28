@@ -51,6 +51,6 @@ fs.readFile(`${path}inventory-checkbox`, 'utf8', function (err, data) {
                     });
                 });
             });
-        }, 10000);
+        }, 1000);
     }
 });
