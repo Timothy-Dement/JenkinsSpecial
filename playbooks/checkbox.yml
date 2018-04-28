@@ -70,7 +70,7 @@
 
     - name: Copy checkbox.io source code
       copy:
-        src: "/home/ubuntu/deploy/checkbox.io"
+        src: "/home/ubuntu/checkbox.io"
         dest: "/home/{{ ansible_user }}/"
 
     - name: Start MongoDB service

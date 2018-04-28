@@ -19,7 +19,7 @@ fs.readFile(`${path}provisioners/inventory-checkbox`, 'utf8', function (err, dat
 
             var output = '';
 
-            request({ url: `http://${ipAddresses[0]}`, method: 'GET' }, function (error, response, body) {
+            request({ url: `http://${ipAddresses[0]}`, method: 'GET', timeout: 1000 }, function (error, response, body) {
 
                 output += '\n------------------------\n';
                 output += '------- ' + datetime.create().format('H:M:S').bold + ' -------\n';
@@ -32,7 +32,7 @@ fs.readFile(`${path}provisioners/inventory-checkbox`, 'utf8', function (err, dat
                     output += `\n${ipAddresses[0]}: ` + '  DOWN  '.bgRed + '\n';
                 }
 
-                request({ url: `http://${ipAddresses[1]}`, method: 'GET' }, function (error, response, body) {
+                request({ url: `http://${ipAddresses[1]}`, method: 'GET', timeout: 1000 }, function (error, response, body) {
                     if (response && response.statusCode && response.statusCode === 200) {
                         output += `\n${ipAddresses[1]}: ` + '   UP   '.bgGreen + '\n';
                     }
@@ -40,7 +40,7 @@ fs.readFile(`${path}provisioners/inventory-checkbox`, 'utf8', function (err, dat
                         output += `\n${ipAddresses[1]}: ` + '  DOWN  '.bgRed + '\n';
                     }
 
-                    request({ url: `http://${ipAddresses[2]}`, method: 'GET' }, function (error, response, body) {
+                    request({ url: `http://${ipAddresses[2]}`, method: 'GET', timeout: 1000}, function (error, response, body) {
                         if (response && response.statusCode && response.statusCode === 200) {
                             output += `\n${ipAddresses[2]}: ` + '   UP   '.bgGreen + '\n';
                         }
@@ -51,6 +51,6 @@ fs.readFile(`${path}provisioners/inventory-checkbox`, 'utf8', function (err, dat
                     });
                 });
             });
-        }, 1000);
+        }, 5000);
     }
 });
