@@ -72,6 +72,7 @@
       - MYSQL_ROOT_PASSWORD
       - MYSQL_DB_USER
       - MYSQL_DB_PASSWORD
+      - DIGITAL_OCEAN_TOKEN
 
     - name: Disable Jenkins setup wizard
       lineinfile:
