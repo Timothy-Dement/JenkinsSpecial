@@ -7,7 +7,7 @@ var path = __dirname.replace(/tools/g, '');
 
 var ipAddresses = [];
 
-fs.readFile(`${path}itrust-cluster-inventory`, 'utf8', function (err, data) {
+fs.readFile(`${path}inventory-checkbox`, 'utf8', function (err, data) {
     if (err) console.log('Failed to read file\n\n', err, '\n');
     else {
         var lines = data.split('\n');
@@ -47,30 +47,10 @@ fs.readFile(`${path}itrust-cluster-inventory`, 'utf8', function (err, data) {
                         else {
                             output += `\n${ipAddresses[2]}:\t` + '  DOWN  '.bgRed + '\n';
                         }
-
-                        request({ url: `http://${ipAddresses[3]}:8080/iTrust2`, method: 'GET' }, function (error, response, body) {
-                            if (response && response.statusCode && response.statusCode === 200) {
-                                output += `\n${ipAddresses[3]}:\t` + '   UP   '.bgGreen + '\n';
-                            }
-                            else {
-                                output += `\n${ipAddresses[3]}:\t` + '  DOWN  '.bgRed + '\n';
-                            }
-
-                            request({ url: `http://${ipAddresses[4]}:8080/iTrust2`, method: 'GET' }, function (error, response, body) {
-                                if (response && response.statusCode && response.statusCode === 200) {
-                                    output += `\n${ipAddresses[4]}:\t` + '   UP   '.bgGreen;
-                                }
-                                else {
-                                    output += `\n${ipAddresses[4]}:\t` + '  DOWN  '.bgRed;
-                                }
-
-                                console.log(output);
-                            });
-                        });
+                        console.log(output);
                     });
                 });
             });
         }, 10000);
     }
 });
-
