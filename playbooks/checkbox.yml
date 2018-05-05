@@ -109,13 +109,13 @@
 
     - name: Transfer newrelic.js template
       template:
-        src: "/home/vagrant/share/JenkinsSpecial/templates/newrelic.js"
+        src: "/home/ubuntu/JenkinsSpecial/templates/newrelic.js"
         dest: "/home/{{ ansible_user }}/checkbox.io/server-side/site/newrelic.js"
         force: yes
 
     - name: Transfer server.js template
       template:
-        src: "/home/vagrant/share/JenkinsSpecial/templates/server.js"
+        src: "/home/ubuntu/JenkinsSpecial/templates/server.js"
         dest: "/home/{{ ansible_user }}/checkbox.io/server-side/site/server.js"
         force: yes
 
