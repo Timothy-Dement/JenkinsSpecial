@@ -73,6 +73,7 @@
       - MYSQL_DB_USER
       - MYSQL_DB_PASSWORD
       - DIGITAL_OCEAN_TOKEN
+      - NEW_RELIC_LICENSE_KEY
 
     - name: Disable Jenkins setup wizard
       lineinfile:

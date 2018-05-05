@@ -90,6 +90,11 @@
       args:
         chdir: "/home/{{ ansible_user }}/checkbox.io/server-side/site"
 
+    - name: Install New Relic npm package
+      shell: "npm install newrelic"
+      args:
+        chdir: "/home/{{ ansible_user }}/checkbox.io/server-side/site"
+
     - name: Update location of public_html into default
       replace:
         dest: "/home/{{ ansible_user }}/checkbox.io/local-conf/default"
@@ -101,6 +106,18 @@
 
     - name: Copy nginx to different location
       shell: "cp /home/{{ ansible_user }}/checkbox.io/local-conf/nginx.conf /etc/nginx/nginx.conf"
+
+    - name: Transfer newrelic.js template
+      template:
+        src: "/home/vagrant/share/JenkinsSpecial/templates/newrelic.js"
+        dest: "/home/{{ ansible_user }}/checkbox.io/server-side/site/newrelic.js"
+        force: yes
+
+    - name: Transfer server.js template
+      template:
+        src: "/home/vagrant/share/JenkinsSpecial/templates/server.js"
+        dest: "/home/{{ ansible_user }}/checkbox.io/server-side/site/server.js"
+        force: yes
 
     - name: Restart nginx
       service:
